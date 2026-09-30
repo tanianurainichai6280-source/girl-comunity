@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girl Community - All in One</title>
+    <style>
+        /* Styling Dasar / Global */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9fafb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .logo span {
+            color: #db2777;
+        }
+
+        .nav-menu button {
+            background: none;
+            border: none;
+            text-decoration: none;
+            color: #4b5563;
+            margin-left: 20px;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-menu button.active, .nav-menu button:hover {
+            color: #db2777;
+        }
+
+        /* Sembunyikan section yang tidak aktif */
+        .page-section {
+            display: none;
+            padding: 40px 8%;
+        }
+
+        .page-section.active-page {
+            display: block;
+        }
+
+        /* Hero / Beranda */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            padding: 40px 8%;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: #db2777;
+        }
+
+        .badge {
+            background: #fce7f3;
+            color: #db2777;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .hero-description {
+            color: #4b5563;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-buttons a, .hero-buttons button {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #db2777;
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #1f2937;
+            border: none;
+        }
+
+        /* Code Card */
+        .code-card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            width: 350px;
+            color: #e2e8f0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .code-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .code-header span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ef4444;
+        }
+
+        .code-header span:nth-child(2) { background: #f59e0b; }
+        .code-header span:nth-child(3) { background: #10b981; }
+
+        .code-content {
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .purple { color: #c084fc; }
+        .cyan { color: #38bdf8; }
+        .green { color: #4ade80; }
+        .indent { padding-left: 20px; }
+
+        /* Feature Grid */
+        .feature-grid, .program-grid, .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-card, .program-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid #e5e7eb;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #db2777;
+            margin-bottom: 15px;
+        }
+
+        /* Page Headers */
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .section-label {
+            color: #db2777;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        /* Tabel Jadwal */
+        .table-wrapper {
+            margin-top: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f3f4f6;
+        }
+
+        /* Kontak Layout */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+        }
+
+        form button {
+            margin-top: 20px;
+            background: #db2777;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #ffffff;
+            color: #6b7280;
+            margin-top: 40px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Music Player Section */
+        .music-section {
+            padding: 30px 8%;
+            background: #fff;
+            margin-top: 30px;
+            border-top: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">
+            Girl<span>Community</span>
+        </div>
+        <div class="nav-menu">
+            <button onclick="switchPage('beranda')" id="btn-beranda" class="active">Beranda</button>
+            <button onclick="switchPage('tentang')" id="btn-tentang">Tentang</button>
+            <button onclick="switchPage('program')" id="btn-program">Program</button>
+            <button onclick="switchPage('kontak')" id="btn-kontak">Kontak</button>
+        </div>
+    </nav>
+
+    <!-- HALAMAN BERANDA -->
+    <div id="beranda" class="page-section active-page">
+        <section class="hero">
+            <div class="hero-content">
+                <p class="badge">TECH COMMUNITY</p>
+                <h1>Girl<br><span>Community.</span></h1>
+                <p class="hero-description">
+                    Wadah kreatif dan inovatif bagi perempuan untuk belajar teknologi, coding, desain, dan berkembang bersama.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="switchPage('program')">Lihat Program →</button>
+                    <button class="btn-secondary" onclick="switchPage('tentang')">Tentang Kami</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-card">
+                    <div class="code-header"><span></span><span></span><span></span></div>
+                    <div class="code-content">
+                        <p><span class="purple">const</span> community =</p>
+                        <p class="indent"><span class="cyan">"Girl Community"</span>;</p><br>
+                        <p><span class="purple">function</span> <span class="green">grow</span>() {</p>
+                        <p class="indent">learn();</p>
+                        <p class="indent">create();</p>
+                        <p class="indent"><span class="green">growTogether</span>();</p>
+                        <p>}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding: 20px 8%;">
+            <div class="section-heading">
+                <p class="section-label">WELCOME</p>
+                <h2>Belajar. Berkarya. Berkembang.</h2>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&lt;/&gt;</div>
+                    <h3>Coding</h3>
+                    <p>Belajar membuat website dan memahami dasar pemrograman.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">UI</div>
+                    <h3>UI/UX Design</h3>
+                    <p>Mengembangkan kemampuan desain aplikasi dan website.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">#</div>
+                    <h3>Data</h3>
+                    <p>Mengenal pengolahan dan analisis data.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- HALAMAN TENTANG -->
+    <div id="tentang" class="page-section">
+        <div class="page-header">
+            <p class="section-label">ABOUT US</p>
+            <h1>Tentang Kami</h1>
+            <p>Mengenal lebih dekat Girl Community.</p>
+        </div>
+        <div class="feature-grid" style="grid-template-columns: 2fr 1fr;">
+            <div class="feature-card">
+                <h2>Komunitas untuk perempuan digital.</h2>
+                <p style="margin-top: 10px;">Girl Community adalah komunitas yang menjadi wadah bagi perempuan untuk belajar coding, desain, teknologi, dan keterampilan digital.</p>
+                <p style="margin-top: 10px;">Kami percaya bahwa belajar teknologi akan menjadi lebih menyenangkan ketika dilakukan bersama.</p>
+            </div>
+            <div class="feature-card" style="background: #fdf2f8; text-align: center;">
+                <h3 style="color: #db2777;">Learn & Grow</h3>
+                <p style="margin-top: 10px;">Learn new skills.<br>Create new ideas.<br>Grow together.</p>
+            </div>
+        </div>
+        <div class="about-grid">
+            <div class="feature-card">
+                <p class="section-label">VISI</p>
+                <h3>Membangun Generasi Digital</h3>
+                <p>Menciptakan lingkungan belajar teknologi yang kreatif, suportif, dan inovatif.</p>
+            </div>
+            <div class="feature-card">
+                <p class="section-label">MISI</p>
+                <h3>Belajar Bersama</h3>
+                <p>Memberikan kesempatan bagi anggota untuk mengembangkan kemampuan teknologi dan kreativitas.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- HALAMAN PROGRAM -->
+    <div id="program" class="page-section">
+        <div class="page-header">
+            <p class="section-label">OUR PROGRAM</p>
+            <h1>Program & Jadwal</h1>
+            <p>Pilih program dan mulai belajar bersama kami.</p>
+        </div>
+        <div class="program-grid">
+            <div class="program-card">
+                <h3>UI/UX Design</h3>
+                <p style="margin-top: 10px;">Belajar membuat desain aplikasi dan website dengan memperhatikan pengalaman pengguna.</p>
+                <p style="margin-top: 15px; font-weight: bold; color: #db2777;">Jadwal: Sabtu</p>
+            </div>
+            <div class="program-card">
+                <h3>Frontend Web</h3>
+                <p style="margin-top: 10px;">Belajar HTML, CSS, dan dasar pembuatan website modern.</p>
+                <p style="margin-top: 15px; font-weight: bold; color: #db2777;">Jadwal: Minggu ke-2</p>
+            </div>
+            <div class="program-card">
+                <h3>Data Science</h3>
+                <p style="margin-top: 10px;">Belajar mengolah dan menganalisis data untuk kebutuhan digital.</p>
+                <p style="margin-top: 15px; font-weight: bold; color: #db2777;">Jadwal: Rabu & Jumat</p>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <h2>Tabel Jadwal Program</h2>
+            <table>
+                <tr>
+                    <th>Program</th>
+                    <th>Deskripsi</th>
+                    <th>Jadwal</th>
+                </tr>
+                <tr>
+                    <td>UI/UX Design</td>
+                    <td>Belajar membuat desain aplikasi dan website.</td>
+                    <td>Sabtu</td>
+                </tr>
+                <tr>
+                    <td>Frontend Web</td>
+                    <td>Belajar HTML, CSS, dan dasar website.</td>
+                    <td>Minggu ke-2</td>
+                </tr>
+                <tr>
+                    <td>Data Science</td>
+                    <td>Belajar mengolah dan menganalisis data.</td>
+                    <td>Rabu & Jumat</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- HALAMAN KONTAK -->
+    <div id="kontak" class="page-section">
+        <div class="page-header">
+            <p class="section-label">JOIN US</p>
+            <h1>Hubungi Kami</h1>
+            <p>Yuk bergabung dengan Girl Community.</p>
+        </div>
+        <div class="contact-layout">
+            <div>
+                <h2>Mari berkembang bersama.</h2>
+                <p style="margin-top: 10px;">Isi formulir pendaftaran untuk bergabung dengan Girl Community.</p>
+                <p style="margin-top: 20px;"><strong>Email:</strong> girlcommunity@gmail.com</p>
+                <p style="margin-top: 10px;"><strong>Prinsip:</strong> Learn • Create • Grow</p>
+            </div>
+            <form onsubmit="event.preventDefault(); alert('Pendaftaran berhasil dikirim!');">
+                <label>Nama Lengkap</label>
+                <input type="text" placeholder="Masukkan nama lengkap" required>
+                <label>Email</label>
+                <input type="email" placeholder="Masukkan email" required>
+                <label>Nomor Telepon</label>
+                <input type="tel" placeholder="Masukkan nomor telepon">
+                <label>Pilih Kelas</label>
+                <select>
+                    <option>Pilih kelas</option>
+                    <option>Pemula</option>
+                    <option>Menengah</option>
+                    <option>Lanjutan</option>
+                </select>
+                <label>Alasan Ingin Bergabung</label>
+                <textarea rows="4" placeholder="Tulis alasan kamu..."></textarea>
+                <button type="submit">Kirim Pendaftaran</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- PEMUTAR MUSIK SPOTIFY (TAYLOR SWIFT - LOVE STORY) -->
+    <div class="music-section">
+        <div style="display: flex; justify-content: center; width: 100%; max-width: 800px; margin: 0 auto;">
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/38T0bIEyvefW01R7P0k9G1?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Girl Community</p>
+    </footer>
+
+    <!-- SCRIPT UNTUK PINDAH HALAMAN -->
+    <script>
+        function switchPage(pageId) {
+            // Sembunyikan semua halaman
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => sec.classList.remove('active-page'));
+
+            // Matikan semua tombol aktif di navbar
+            const buttons = document.querySelectorAll('.nav-menu button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Tampilkan halaman yang dipilih
+            document.getElementById(pageId).classList.add('active-page');
+            document.getElementById('btn-' + pageId).classList.add('active');
+
+            // Scroll ke atas otomatis
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
